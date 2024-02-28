@@ -164,6 +164,38 @@ class TaskOperation {
     })
   }
 
+  updateTask(taskId) {
+    console.log('Updating task:', `https://oprec-api.labse.in/api/task/${taskId}`)
+    fetch(`https://oprec-api.labse.in/api/task/${taskId}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${this.accToken}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        title: this.title,
+        description: this.description,
+        dueDate: this.dueDate,
+        tags: ['school', 'important']
+      })
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Task updated:', data);
+      this.getTask(); // Refresh task list after update
+      this.messageElement.textContent = "Task Updated Successfully";
+    })
+    .catch(error => {
+      console.error('Error updating task:', error);
+      this.messageElement.textContent = "Error updating task";
+    })
+  }
+
   displayTaskDOM(task) {
     console.log('Displaying task in DOM')
     // Create a new board column div
@@ -176,7 +208,8 @@ class TaskOperation {
       <div class="board-column-desc">${task.description}</div>
       <div class="board-column-dueDate">${task.dueDate}</div>
       <button class="delete-task-btn">Delete</button>
-
+      <button class="edit-task-btn">Edit</button>
+      <div class="edit-task-form"></div>
     `;
 
     // Append the board column to the main board
@@ -188,7 +221,42 @@ class TaskOperation {
       this.deleteTask(task._id)
     })
 
+    // Event listener to edit button
+    const editButton = boardColumn.querySelector('.edit-task-btn');
+    editButton.addEventListener('click', () => {
+      const editTaskFormContainer = boardColumn.querySelector('.edit-task-form')
+      this.editTask(task._id, editTaskFormContainer)
+    })
+  }
 
+  // Display edit task form
+  editTask(taskId, editTaskFormContainer) {
+    console.log('Editing task:', taskId)
+    editTaskFormContainer.innerHTML = `
+        <form id="update-task-form">
+          <input type="text" id="task-title" placeholder="Task Title">
+          <input type="text" id="task-desc" placeholder="Task Description">
+          <input type="date" id="task-dueDate">
+          <button type="submit">Update Task</button>
+          <button class="cancel-btn">Cancel</button>
+        </form>
+    `
+
+    // Event button listener to cancel edit
+    const cancelButton = editTaskFormContainer.querySelector('.cancel-btn')
+    cancelButton.addEventListener('click', () => {
+      editTaskFormContainer.innerHTML = ''
+    })
+
+    const updateTaskForm = editTaskFormContainer.querySelector('#update-task-form')
+    // Event listener to update task
+    updateTaskForm.addEventListener('submit', (event) => {
+      console.log('Entering update task event listener')
+      event.preventDefault() // Prevent form submission
+      editTaskFormContainer.innerHTML = ''
+      this.getFormValues()
+      this.updateTask(taskId)
+    })
   }
 
   clearTaskDOM() {
