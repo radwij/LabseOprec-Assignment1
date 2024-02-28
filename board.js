@@ -36,7 +36,6 @@ class MandatoryCheck {
     })
   }
 }
-
 class TaskOperation {
   constructor(mainBoard, form, messageElement, messageElementLoginState, accToken) {
     this.mainBoard = mainBoard
@@ -140,6 +139,31 @@ class TaskOperation {
     });
   }
 
+  deleteTask(taskId) {
+    console.log('Deleting task:', `https://oprec-api.labse.in/api/task/${taskId}`)
+    fetch(`https://oprec-api.labse.in/api/task/${taskId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${this.accToken}`
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Task deleted:', data);
+      this.getTask(); // Refresh task list after deletion
+      this.messageElement.textContent = "Task Deleted Successfully";
+    })
+    .catch(error => {
+      console.error('Error deleting task:', error);
+      this.messageElement.textContent = "Error deleting task";
+    })
+  }
+
   displayTaskDOM(task) {
     console.log('Displaying task in DOM')
     // Create a new board column div
@@ -151,10 +175,20 @@ class TaskOperation {
       <div class="board-column-title">${task.title}</div>
       <div class="board-column-desc">${task.description}</div>
       <div class="board-column-dueDate">${task.dueDate}</div>
+      <button class="delete-task-btn">Delete</button>
+
     `;
 
     // Append the board column to the main board
     this.mainBoard.appendChild(boardColumn)
+
+    // Event listener to delete button
+    const deleteButton = boardColumn.querySelector('.delete-task-btn');
+    deleteButton.addEventListener('click', () => {
+      this.deleteTask(task._id)
+    })
+
+
   }
 
   clearTaskDOM() {
@@ -185,4 +219,6 @@ const taskOperation = new TaskOperation(
 // Callling all avengers
 mandatoryCheck.getLoginState()
 taskOperation.getTask()
+
+// Event Listerner
 taskOperation.createTask()
