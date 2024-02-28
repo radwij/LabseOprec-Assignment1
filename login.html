@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simple Project Management Board</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="login.js" defer></script>
+  </head>
+
+  <body>
+    <!-- navbar -->
+    <div class="container">
+      <div id="navigation-bar">
+        <div id="header-text">Project Management Board</div>
+        <div id="nav-links">
+          <a href="./index.html" class="nav-link">Register</a>
+          <a href="./login.html" class="nav-link">Login</a>
+          <a href="./board.html" class="nav-link">Board</a>
+      </div>
+    </div>
+
+    <!-- login form -->
+    <div class="container" id="login">
+      <div class="sub-title">Log In</div>
+      <div class="messageElementLoginState"></div>
+      <form class="userValidation-form" id="login-form">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="text" id="email" name="email" placeholder="Enter E-Mail" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" placeholder="Enter Password" required>
+        </div>
+        <button type="submit" class="btn">Submit</button>
+      </form>
+
+      <div class="messageElement"></div>
+    </div>  
+
+  </body>
+</html>

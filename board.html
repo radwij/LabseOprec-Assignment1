@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simple Project Management Board</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="board.js" defer></script>
+  </head>
+
+  <body>
+    <!-- navbar -->
+    <div class="container">
+      <div id="navigation-bar">
+        <div id="header-text">Project Management Board</div>
+        <div id="nav-links">
+          <a href="./index.html" class="nav-link">Register</a>
+          <a href="./login.html" class="nav-link">Login</a>
+          <a href="./board.html" class="nav-link">Board</a>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="sub-title">Board</div>
+      <div class="messageElementLoginState"></div>
+      <div class="main-board">
+        <!-- <div class="board-column">
+          <div class="board-column-title">To Do</div>
+          <div class="board-column-content" id="todo"></div>
+        </div>
+        <div class="board-column">
+          <div class="board-column-title">In Progress</div>
+          <div class="board-column-content" id="inprogress"></div>
+        </div>
+        <div class="board-column">
+          <div class="board-column-title">Done</div>
+          <div class="board-column-content" id="done"></div>
+        </div> -->
+      </div>
+      <div class="messageElement"></div>
+    </div>
+
+    <!-- task and checklist form -->
+    <div class="container">
+      <div class="subform-group">
+        <div class="sub-form">
+          <div class="sub-title">Add Task</div>
+          <form class="task-form" id="task-form">
+            <div class="form-group">
+              <label for="task-title">Task:</label>
+              <input type="text" id="task-title" name="task-title" placeholder="Enter Task" required>
+            </div>
+            <div class="form-group">
+              <label for="task-desc">Description:</label>
+              <input type="text" id="task-desc" name="task-desc" placeholder="Desribe the task" required>
+            </div>
+            <div class="form-group">
+              <label for="task-dueDate">Due Date:</label>
+              <input type="date" id="task-dueDate" name="task-dueDate" placeholder="Desribe the task" required>
+            </div>
+            <button type="submit" class="btn">Add Task</button>
+          </form>
+        </div>
+  
+        <div class="sub-form">
+          <div class="sub-title">Add Checklist</div>
+          <form class="ckl-form" id="ckl-form">
+            <div class="form-group">
+              <label for="ckl">Checklist:</label>
+              <input type="text" id="ckl" name="ckl" placeholder="Enter checklist" required>
+            </div>
+            <div class="form-group">
+              <label for="ckl-done">Checklist Status:</label>
+              <select name="ckl-done" id="ckl-done">
+                <option value="true">Done</option>
+                <option value="false">Note Done</option>
+              </select>
+            </div>
+            <button type="submit" class="btn">Add Checklist</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  margin: 2rem;
+}
+
+#header-text {
+  font-size: 2rem;
+}
+
+.sub-title {
+  font-size: 1.5rem;
+}
+
+.main-board {
+  display: flex;
+  border: solid 1px black;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  
+}
+
+.board-column {
+  border: solid 1px black;
+  min-width: 15rem;
+  margin: 0.5rem;
+  padding: 0.2rem;
+}
+
+.board-column-title {
+  background-color: black;
+  color: white;
+}
+
+.subform-group{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
